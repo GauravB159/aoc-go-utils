@@ -2,12 +2,11 @@ package aocutils
 
 import (
 	"image"
-	"image/color"
 	"image/gif"
 	"os"
 )
 
-func CreateGIF(images []*image.Paletted, palette []color.Color, filename string) {
+func CreateGIF(images []*image.Paletted, filename string) {
 	var delays []int
 	for range images {
 		delays = append(delays, 1)
