@@ -6,25 +6,49 @@ import (
 	"os"
 )
 
-func CreateGIF(images []*image.Paletted, filename string) {
+type GIF struct {
+	Images     []*image.Paletted
+	Filename   string
+	Frameskip  int
+	Framecount int
+}
+
+func CreateGIF(filename string, frameskip int) GIF {
+	return GIF{
+		Images:     make([]*image.Paletted, 0),
+		Filename:   filename + ".gif",
+		Frameskip:  frameskip,
+		Framecount: 0,
+	}
+}
+
+func (g *GIF) AddFrame(image Image) {
+	g.Framecount += 1
+	if g.Framecount%g.Frameskip == 0 {
+		copy := image.Clone()
+		g.Images = append(g.Images, copy.GetRawImage())
+	}
+}
+
+func (g *GIF) WriteGIFToFile() {
 	var delays []int
-	for range images {
+	for range g.Images {
 		delays = append(delays, 1)
 	}
 
-	lastFrame := images[len(images)-1]
+	lastFrame := g.Images[len(g.Images)-1]
 	for i := 0; i < 20; i++ {
-		images = append(images, lastFrame)
+		g.Images = append(g.Images, lastFrame)
 		delays = append(delays, 100)
 	}
-	gifFile, err := os.Create(filename + ".gif")
+	gifFile, err := os.Create(g.Filename)
 	if err != nil {
 		panic(err)
 	}
 	defer gifFile.Close()
 
 	err = gif.EncodeAll(gifFile, &gif.GIF{
-		Image: images,
+		Image: g.Images,
 		Delay: delays,
 	})
 	if err != nil {
