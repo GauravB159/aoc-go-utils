@@ -1,6 +1,9 @@
 package aocutils
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Grid struct {
 	Data map[Key]int
@@ -22,7 +25,7 @@ func CreateGrid(lines []string) Grid {
 	for row, line := range lines {
 		for col, char := range line {
 			value, _ := strconv.Atoi(string(char))
-			grid.Data[Key{Row: row, Col: col}] = value + 1
+			grid.Data[Key{Row: row, Col: col}] = value
 		}
 	}
 	return grid
@@ -49,4 +52,15 @@ func (grid *Grid) GetValue(row int, col int) (int, bool) {
 func (grid *Grid) SetValue(row int, col int, value int) {
 	key := Key{Row: row, Col: col}
 	grid.Data[key] = value
+}
+
+func (grid *Grid) Print() {
+	for i := 0; i < grid.Rows; i++ {
+		for j := 0; j < grid.Cols; j++ {
+			data, _ := grid.GetValue(i, j)
+			fmt.Printf("%d", data)
+		}
+		fmt.Println()
+	}
+	fmt.Println()
 }

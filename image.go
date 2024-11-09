@@ -36,21 +36,29 @@ func (img *Image) Clone() Image {
 	return copied_image
 }
 
-func (img *Image) UsePaletteReds() {
+func (img *Image) UsePaletteReds(inverse bool) {
 	palette := make([]color.Color, 0, 11)
 	palette = append(palette, color.Black)
 	for i := 0; i <= 9; i++ {
-		palette = append(palette, color.RGBA{R: 60 + uint8(195*(float64(9-i)/9)), G: 0, B: 0, A: 255})
+		if inverse {
+			palette = append(palette, color.RGBA{R: 60 + uint8(195*(float64(i)/9)), G: 0, B: 0, A: 255})
+		} else {
+			palette = append(palette, color.RGBA{R: 60 + uint8(195*(float64(9-i)/9)), G: 0, B: 0, A: 255})
+		}
 	}
 	palette = append(palette, color.Transparent)
 	img.raw.Palette = palette
 }
 
-func (img *Image) UsePaletteWideReds() {
+func (img *Image) UsePaletteWideReds(inverse bool) {
 	palette := make([]color.Color, 0, 11)
 	palette = append(palette, color.Black)
 	for i := 0; i <= 9; i++ {
-		palette = append(palette, color.RGBA{R: 0 + uint8(255*(float64(9-i)/9)), G: 0, B: 0, A: 255})
+		if inverse {
+			palette = append(palette, color.RGBA{R: 0 + uint8(255*(float64(i)/9)), G: 0, B: 0, A: 255})
+		} else {
+			palette = append(palette, color.RGBA{R: 0 + uint8(255*(float64(9-i)/9)), G: 0, B: 0, A: 255})
+		}
 	}
 	palette = append(palette, color.Transparent)
 	img.raw.Palette = palette
