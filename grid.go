@@ -31,6 +31,21 @@ func CreateGrid(lines []string) Grid {
 	return grid
 }
 
+func CreateCharacterGrid(lines []string) Grid {
+	grid := Grid{
+		Data: make(map[Key]int, len(lines)*len(lines[0])),
+		Rows: len(lines),
+		Cols: len(lines[0]),
+	}
+	for row, line := range lines {
+		for col, char := range line {
+			value := int(char)
+			grid.Data[Key{Row: row, Col: col}] = value
+		}
+	}
+	return grid
+}
+
 func (grid *Grid) GetNumRows() int {
 	return grid.Rows
 }
