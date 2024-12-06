@@ -79,3 +79,14 @@ func (grid *Grid) Print() {
 	}
 	fmt.Println()
 }
+
+func (grid *Grid) PrintChar() {
+	for i := 0; i < grid.Rows; i++ {
+		for j := 0; j < grid.Cols; j++ {
+			data, _ := grid.GetValue(i, j)
+			fmt.Printf("%s", string(data))
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+}
