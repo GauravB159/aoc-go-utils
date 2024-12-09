@@ -37,7 +37,7 @@ func (g *GIF) WriteGIFToFile() {
 	}
 
 	lastFrame := g.Images[len(g.Images)-1]
-	for i := 0; i < g.Frameskip*2; i++ {
+	for i := 0; i < 20; i++ {
 		g.Images = append(g.Images, lastFrame)
 		delays = append(delays, 100)
 	}
