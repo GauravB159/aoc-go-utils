@@ -64,6 +64,22 @@ func (img *Image) UsePaletteWideReds(inverse bool) {
 	img.raw.Palette = palette
 }
 
+func (img *Image) UsePaletteRedToYellow() {
+	palette := make([]color.Color, 0, 10)
+	palette = append(palette, color.Black)
+	palette = append(palette, color.RGBA{R: 255, G: 187, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 170, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 154, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 137, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 121, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 104, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 87, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 71, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 54, B: 37, A: 255})
+	palette = append(palette, color.RGBA{R: 255, G: 34, B: 37, A: 255})
+	img.raw.Palette = palette
+}
+
 func (img *Image) UsePaletteColors() {
 	palette := make([]color.Color, 0, 7)
 	palette = append(palette, color.Black)
