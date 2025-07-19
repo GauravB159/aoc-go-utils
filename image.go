@@ -18,7 +18,7 @@ type Image struct {
 
 func CreateImage(rows int, cols int, rowzoom int, colzoom int, filename string) Image {
 	return Image{
-		raw:      image.NewPaletted(image.Rect(0, 0, cols*colzoom, rows*rowzoom), make([]color.Color, 0, 0)),
+		raw:      image.NewPaletted(image.Rect(0, 0, cols*colzoom, rows*rowzoom), make([]color.Color, 0)),
 		rows:     rows,
 		cols:     cols,
 		rowzoom:  rowzoom,
