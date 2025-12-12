@@ -31,7 +31,7 @@ func CreateGrid(lines []string) Grid {
 	return grid
 }
 
-func CreateGridByDimensions(width int, height int, defaultFill int) Grid {
+func CreateGridByDimensions(width int, height int, fill int) Grid {
 	grid := Grid{
 		Data: make(map[Key]int, width*height),
 		Rows: height,
@@ -39,7 +39,7 @@ func CreateGridByDimensions(width int, height int, defaultFill int) Grid {
 	}
 	for i := 0; i < width; i++ {
 		for j := 0; j < height; j++ {
-			grid.SetValue(j, i, defaultFill)
+			grid.SetValue(j, i, fill)
 		}
 	}
 	return grid
