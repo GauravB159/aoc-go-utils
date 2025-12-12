@@ -83,6 +83,20 @@ func (grid *Grid) SetValue(row int, col int, value int) {
 	grid.Data[key] = value
 }
 
+func (grid *Grid) Exists(row int, col int) bool {
+	key := Key{Row: row, Col: col}
+	_, exists := grid.Data[key]
+	return exists
+}
+
+func (grid *Grid) Copy() Grid {
+	dataCopy := make(map[Key]int)
+	for key := range grid.Data {
+		dataCopy[key] = grid.Data[key]
+	}
+	return Grid{Rows: grid.Rows, Cols: grid.Cols, Data: dataCopy}
+}
+
 func (grid *Grid) Print() {
 	for i := 0; i < grid.Rows; i++ {
 		for j := 0; j < grid.Cols; j++ {
